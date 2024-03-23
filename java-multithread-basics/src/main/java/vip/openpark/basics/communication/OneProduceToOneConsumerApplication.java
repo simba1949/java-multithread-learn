@@ -24,12 +24,12 @@ public class OneProduceToOneConsumerApplication {
                     // 阻塞生产者线程
                     lock.wait();
                 } catch (InterruptedException e) {
-                    log.error("生产者线程{}，发生异常", thread.getName(), e);
+                    log.error("发生异常", e);
                 }
             } else { // 生产者未生产数据，则生产数据
                 isProduce = true;
                 count++;
-                log.info("生产者线程{}，生产数据{}", thread.getName(), count);
+                log.info("生产数据{}", count);
                 // 通知消费者线程
                 lock.notify();
             }
@@ -44,12 +44,12 @@ public class OneProduceToOneConsumerApplication {
                     // 阻塞消费者线程
                     lock.wait();
                 } catch (InterruptedException e) {
-                    log.error("消费者线程{}，发生异常", thread.getName(), e);
+                    log.error("发生异常", e);
                 }
             } else { // 生产者已经生产了数据，则进行消费
                 final int countTemp = count;
                 count--;
-                log.info("消费者线程{}，获取到消费数据{}，消费后的数据{}", thread.getName(), countTemp, count);
+                log.info("获取到消费数据{}，消费后的数据{}", countTemp, count);
                 isProduce = false;
                 // 通知生产者线程
                 lock.notify();
