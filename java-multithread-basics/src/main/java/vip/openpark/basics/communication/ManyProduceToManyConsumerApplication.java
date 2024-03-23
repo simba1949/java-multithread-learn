@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 /**
- * TODO ANTHONY
  * 基于 {@link Object} object.wait() 和 object.notifyAll() 的生产者消费者模式
  * <h1>解决多生产者多消费者存在假死的问题</h1>
  *
@@ -34,7 +33,7 @@ public class ManyProduceToManyConsumerApplication {
 			++count;
 			log.info("生产数据{}", count);
 			isProduce = true;
-			// 通知消费者线程
+			// 通知所有等待的线程
 			lock.notifyAll();
 		}
 	}
@@ -54,13 +53,13 @@ public class ManyProduceToManyConsumerApplication {
 			--count;
 			log.info("获取到消费数据{}，消费后的数据{}", countTemp, count);
 			isProduce = false;
-			// 通知生产者线程
+			// 通知所有等待的线程
 			lock.notifyAll();
 		}
 	}
 	
 	public static void main(String[] args) throws IOException {
-		OneProduceToOneConsumerApplication application = new OneProduceToOneConsumerApplication();
+		ManyProduceToManyConsumerApplication application = new ManyProduceToManyConsumerApplication();
 		
 		Stream.iterate(0, i -> i + 1)
 			.limit(10)
