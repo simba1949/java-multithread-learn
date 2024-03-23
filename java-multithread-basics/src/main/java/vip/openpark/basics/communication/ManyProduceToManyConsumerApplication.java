@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 /**
  * 基于 {@link Object} object.wait() 和 object.notifyAll() 的生产者消费者模式
- * <h1>解决多生产者多消费者存在假死的问题</h1>
+ * <h1>解决基于 object.wait() 和 object.notify()多生产者多消费者存在假死的问题</h1>
  *
  * @author anthony
  * @since 2024/3/21 23:46
