@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * <h1>存在假死问题</h1>
  * <h1>改进方案参考{@link ManyProduceToManyConsumerApplication}</h1>
  * <div>
- *     在多线程中，多个生产者与多个消费者之间存在竞争关系，object.notify() 无法确定唤醒的哪个锁，就会导致CPU空轮询
+ *     在多线程中，多个生产者与多个消费者之间存在竞争关系，object.notify() 无法确定唤醒的哪个锁，导致假死问题
  * </div>
  * <div>
  *     假设第一个拿到了锁的是生产者A，其他生产者和所有消费者线程都处于等待状态，生产者A调用 object.notify() 时，
