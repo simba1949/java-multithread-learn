@@ -18,7 +18,6 @@ public class OneProduceToOneConsumerApplication {
 
     public void produce() {
         synchronized (lock) {
-            Thread thread = Thread.currentThread();
             if (isProduce) { // 生产者已经生产了数据，则阻塞生产者
                 try {
                     // 阻塞生产者线程
@@ -27,9 +26,9 @@ public class OneProduceToOneConsumerApplication {
                     log.error("发生异常", e);
                 }
             } else { // 生产者未生产数据，则生产数据
-                isProduce = true;
                 count++;
                 log.info("生产数据{}", count);
+                isProduce = true;
                 // 通知消费者线程
                 lock.notify();
             }
@@ -38,7 +37,6 @@ public class OneProduceToOneConsumerApplication {
 
     public void consume() {
         synchronized (lock) {
-            Thread thread = Thread.currentThread();
             if (!isProduce) { // 生产者未生产数据，则阻塞
                 try {
                     // 阻塞消费者线程
