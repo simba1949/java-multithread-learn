@@ -28,7 +28,6 @@ public class VolatileApplication {
 	 */
 	private static void readAndWrite() {
 		new Thread(() -> {
-			// 从主内存中读取数据
 			int localCount = count;
 			while (localCount < MAX_COUNT) {
 				if (localCount != count) {
@@ -39,7 +38,6 @@ public class VolatileApplication {
 		}, "读线程").start();
 		
 		new Thread(() -> {
-			// 从主内存中读取数据
 			int localCount = count;
 			while (localCount < MAX_COUNT) {
 				log.info("写线程写入的数据是:localCount={}", ++localCount);
@@ -58,7 +56,6 @@ public class VolatileApplication {
 	 */
 	private static void writeAndWrite() {
 		new Thread(() -> {
-			// 从主内存中读取数据
 			int localCount = count;
 			while (localCount < MAX_COUNT) {
 				log.info("1写线程写入的数据是:localCount={}", ++localCount);
@@ -72,7 +69,6 @@ public class VolatileApplication {
 		}, "写线程-1").start();
 		
 		new Thread(() -> {
-			// 从主内存中读取数据
 			int localCount = count;
 			while (localCount < MAX_COUNT) {
 				log.info("2写线程写入的数据是:localCount={}", ++localCount);
