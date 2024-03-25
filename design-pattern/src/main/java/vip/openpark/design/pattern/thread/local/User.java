@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public final class Context {
+public final class User {
 	private String name;
 	private String age;
 }
