@@ -12,7 +12,7 @@
     <modules>
         <module>java-multithread-basics</module>
         <module>java-thread-pool</module>
-        <module>design-pattern</module>
+        <module>thread-design-pattern</module>
         <module>juc-learn</module>
     </modules>
 
