@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>java-multithread-basics</module>
-        <module>java-thread-pool</module>
+        <module>multi-thread-basics</module>
+        <module>thread-pool</module>
         <module>thread-design-pattern</module>
         <module>juc-learn</module>
     </modules>
