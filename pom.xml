@@ -14,6 +14,7 @@
         <module>thread-pool</module>
         <module>thread-design-pattern</module>
         <module>juc-learn</module>
+        <module>multi-thread-example</module>
     </modules>
 
     <properties>
