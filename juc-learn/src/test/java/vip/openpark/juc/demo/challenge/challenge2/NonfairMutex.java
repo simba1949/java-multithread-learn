@@ -14,7 +14,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @version 2026-07-20
  * @since 2026-07-20 09:03
  */
-public class NonfairMutex {
+public class NonfairMutex implements Mutex {
 
     // ★ 内部类：继承 AQS，定义 state 语义
     // state = 0 → 锁空闲
@@ -82,20 +82,9 @@ public class NonfairMutex {
 
     // ===== 外部 API =====
 
+    @Override
     public void lock() {
         sync.acquire(1);  // 调用 AQS 的模板方法（独占模式获取）
-    }
-
-    public void unlock() {
-        sync.release(1);  // 调用 AQS 的模板方法（独占模式释放）
-    }
-
-    public boolean isLocked() {
-        return sync.isLocked();
-    }
-
-    public boolean isHeldByCurrentThread() {
-        return sync.isHeldExclusively();
     }
 
     /**
@@ -104,7 +93,22 @@ public class NonfairMutex {
      * 思考题：为什么这里调用 tryAcquire 而不是 acquire？
      * acquire 会入队阻塞，tryLock 只尝试一次
      */
+    @Override
     public boolean tryLock() {
         return sync.tryAcquire(1);
+    }
+
+    @Override
+    public void unlock() {
+        sync.release(1);  // 调用 AQS 的模板方法（独占模式释放）
+    }
+
+    @Override
+    public boolean isLocked() {
+        return sync.isLocked();
+    }
+
+    public boolean isHeldByCurrentThread() {
+        return sync.isHeldExclusively();
     }
 }
